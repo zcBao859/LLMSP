@@ -1,0 +1,14 @@
+{
+    "truthful_qa": 817,
+    "gsm8k": 100,
+    "openai_humaneval": 164,
+    "lukaemon_mmlu_international_law": 30,
+    "lukaemon_mmlu_moral_scenarios": 30,
+    "lukaemon_mmlu_professional_law": 30,
+    "lukaemon_mmlu_medical_genetics": 30,
+    "lukaemon_mmlu_philosophy": 30,
+    "lukaemon_mmlu_business_ethics": 30,
+    "lukaemon_mmlu_moral_disputes": 30,
+    "ceval-computer_network": 19,
+    "ceval-operating_system": 19
+}

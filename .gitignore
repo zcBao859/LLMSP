@@ -1,2 +1,15 @@
 .idea
+.vscode
+*.pyc
+__pycache__
+/backend/chat/migrations/__pycache__
+backend/evaluation/data/*
+backend/__pycache__
+backend/evaluation/outputs/*
+backend/evaluation/tmp/*
+backend/evaluation/task_logs/*
+backend/evaluation/.cache/*
+backend/logs/*
+backend/outputs
 
+*/__pycache__/*
