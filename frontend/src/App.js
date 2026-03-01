@@ -26,6 +26,7 @@ import EvaluationPage from './pages/evaluation'; // 修改：从 evaluation 目�
 import ResultsPage from './pages/ResultsPage';
 import ModelsPage from './pages/ModelsPage';
 import DashboardPage from './pages/DashboardPage';
+import SubjectivePage from './pages/SubjectivePage'; // <--- 新增这行（假设你的文件叫这个名字）
 
 // 导入API服务 - 注意：这里使用全局的 api.js
 import { chatAPI } from './services/api';
@@ -57,6 +58,7 @@ function AppContent() {
       '/dashboard': 'dashboard',
       '/chat': 'chat',
       '/evaluation': 'evaluation',
+      '/subjective': 'Subjective',
       '/results': 'results',
       '/models': 'models',
       '/settings': 'settings',
@@ -183,6 +185,12 @@ function AppContent() {
       path: '/evaluation',
     },
     {
+      key: 'Subjective',
+      icon: <ApiOutlined />,
+      label: '主观评测',
+      path: '/subjective',
+    },
+    {
       key: 'results',
       icon: <BarChartOutlined />,
       label: '评测结果',
@@ -200,6 +208,7 @@ function AppContent() {
       label: '系统设置',
       path: '/settings',
     },
+
   ], []);
 
   // 获取整体状态 - 优化版
@@ -343,6 +352,7 @@ function AppContent() {
               <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/chat" element={<ChatPage />} />
               <Route path="/evaluation" element={<EvaluationPage />} />
+              <Route path="/subjective" element={<SubjectivePage />} /> 
               <Route path="/results" element={<ResultsPage />} />
               <Route path="/models" element={<ModelsPage />} />
               <Route path="/settings" element={<SettingsPage />} />

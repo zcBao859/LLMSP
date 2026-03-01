@@ -456,6 +456,65 @@ export const evaluationAPI = {
   }
 };
 
+// ==========================================
+// Subjective API - 主观评测专用接口
+// ==========================================
+export const subjectiveAPI = {
+  // 0. 测试连通性
+  testConnection: () => 
+    apiClient.get('/subjective/test/'),
+
+  // --------------------------------------------------
+  // 任务管理 (对应后端的 SubjectiveTaskViewSet)
+  // --------------------------------------------------
+  
+  // 1. 获取任务列表 (GET /api/subjective/tasks/)
+  getTasks: (params = {}) => 
+    apiClient.get('/subjective/tasks/', { params }),
+
+  // 2. 创建新任务 (POST /api/subjective/tasks/)
+  createTask: (data) => 
+    apiClient.post('/subjective/tasks/', data),
+
+  // 3. 获取单个任务详情，包含该任务下的所有题目 (GET /api/subjective/tasks/{id}/)
+  getTask: (id) => 
+    apiClient.get(`/subjective/tasks/${id}/`),
+
+  // 4. 更新任务信息 (PUT /api/subjective/tasks/{id}/)
+  updateTask: (id, data) => 
+    apiClient.put(`/subjective/tasks/${id}/`, data),
+
+  // 5. 删除任务 (DELETE /api/subjective/tasks/{id}/)
+  deleteTask: (id) => 
+    apiClient.delete(`/subjective/tasks/${id}/`),
+
+  // 6. 触发大模型裁判自动评测 (POST /api/subjective/tasks/{id}/run_evaluation/)
+  runEvaluation: (id) => 
+    apiClient.post(
+      `/subjective/tasks/${id}/run_evaluation/`, 
+      {}, // POST 请求的 body 数据为空
+      { timeout: 1200000 } // 单独给这个请求设置 120000 毫秒（2分钟）的超时限制
+    ),
+
+  // 7. 获取某道题的详情 (GET /api/subjective/items/{id}/)
+  getItem: (id) => 
+    apiClient.get(`/subjective/items/${id}/`),
+
+  // 8. 添加单个测试题目到任务中 (POST /api/subjective/items/)
+  // 传入的数据格式大概是: { task: 1, prompt: "写一首诗" }
+  createItem: (data) => 
+    apiClient.post('/subjective/items/', data),
+
+  // 9. 更新单个题目 (PATCH /api/subjective/items/{id}/)
+  // 比如人工介入修改分数，或者录入人工偏好: { human_preference: "A" }
+  updateItem: (id, data) => 
+    apiClient.patch(`/subjective/items/${id}/`, data),
+
+  // 10. 删除单个题目 (DELETE /api/subjective/items/{id}/)
+  deleteItem: (id) => 
+    apiClient.delete(`/subjective/items/${id}/`),
+};
+
 // 任务轮询器
 export class TaskPoller {
   constructor(taskId, onProgress, onComplete, onError) {
@@ -706,6 +765,7 @@ export const apiUtils = {
 export default {
   chat: chatAPI,
   evaluation: evaluationAPI,
+  subjective: subjectiveAPI,
   utils: apiUtils,
   TaskPoller,
   EvaluationWebSocket,
