@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     #"chat",
     "evaluation",
     "openai_api",  # 添加 openai_api 应用
+    'subjective'  #主观评测
 ]
 
 MIDDLEWARE = [
