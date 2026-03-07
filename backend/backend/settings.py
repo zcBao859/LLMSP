@@ -33,8 +33,9 @@ INSTALLED_APPS = [
     # 第三方应用
     "rest_framework",
     "corsheaders",
+    "django_celery_results",  # Celery结果存储
     # 自定义应用
-    #"chat",
+    "chat",
     "evaluation",
     "openai_api",  # 添加 openai_api 应用
     'subjective'  #主观评测
@@ -397,8 +398,9 @@ DEEPSEEK_DEFAULT_MODEL = os.getenv('DEEPSEEK_DEFAULT_MODEL', 'deepseek-chat')
 DEFAULT_AI_PROVIDER = os.getenv('DEFAULT_AI_PROVIDER', 'deepseek')
 
 # Celery配置
-CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL', 'redis://localhost:6379/0')
-CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND', 'redis://localhost:6379/0')
+CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL', 'memory://')
+CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND', 'cache+memory://')
+CELERY_TASK_ALWAYS_EAGER = True  # 同步执行任务（开发环境）
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
